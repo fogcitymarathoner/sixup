@@ -1,0 +1,9 @@
+<h1>Colleges Applied To</h1>
+
+
+<div>
+  <a href="/#!/college_add/">Add</a>
+</div>
+<div ng-repeat="college in colleges">
+  <a href="/#!/college_edit/{{college.college.id}}">Edit</a> - {{college.college.name}}
+</div>

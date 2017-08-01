@@ -1,0 +1,39 @@
+<div class="jumbotron">
+  <h1>Please login</h1>
+  <p class="lead">
+        <form name="loginForm" class="form-horizontal" role="form"  ng-controller="UserloginCtrl"
+          ng-submit="submitted=true; userLogin(user, loginForm.$valid)" novalidate>
+        <div class="form-input">
+            <label>User:</label>
+            <input type="text" ng-model="user.name" required ng-minlength="2" ng-maxlength="50" name="name"
+                    ng-model-options="{updateOn: 'blur'}" required \>
+
+            <div ng-if="submitted">
+                <div ng-messages="loginForm.name.$error">
+                    <div ng-message="required" class="field-error">You must enter a user name.</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-input">
+            <label>Password:</label>
+            <input type="password" ng-model="user.password" required ng-minlength="2" ng-maxlength="50" name="password"
+                    ng-model-options="{updateOn: 'blur'}" required \>
+
+            <div ng-if="submitted">
+                <div ng-messages="loginForm.password.$error">
+                    <div ng-message="required" class="field-error">You must enter a user password.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-success" value="Login"/>
+                <a type="submit" class="btn btn-danger" ng-href="#/">Cancel</a>
+            </div>
+        </div>
+
+    </form>
+  </p>
+</div>
+
