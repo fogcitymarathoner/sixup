@@ -1,13 +1,14 @@
 import json
 
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.http import HttpResponse
 
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import serializers
-from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
 
 
@@ -16,6 +17,7 @@ from applicant import models
 
 class CollegeSerializer(serializers.Serializer):
     """"""
+
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
 
@@ -28,6 +30,7 @@ class CollegeSerializer(serializers.Serializer):
 
 class UserSerializer(serializers.Serializer):
     """"""
+
     id = serializers.IntegerField(read_only=True)
     username = serializers.CharField()
     first_name = serializers.CharField(required=False)
@@ -62,6 +65,7 @@ class UserUpdateSerializer(serializers.Serializer):
 
 class UserDetail(generics.ListAPIView):
     """"""
+
     serializer_class = UserSerializer
 
     def get_queryset(self):
@@ -88,15 +92,14 @@ class UserList(APIView):
     def post(self, request, format=None):
         """Register a user"""
 
-        user, _ = User.objects.get_or_create(username=request.data['username'], email=request.data['email'])
-        user.set_password(request.data['password'])
-
-        serializer = UserSerializer(data=[user])
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            user, _ = User.objects.get_or_create(username=request.data['username'], email=request.data['email'])
+            user.set_password(request.data['password'])
+            user.save()
+            return JsonResponse({'username': request.data['username']})
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=500)
 
 
 class UserUpdate(APIView):

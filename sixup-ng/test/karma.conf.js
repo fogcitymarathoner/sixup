@@ -35,6 +35,7 @@ module.exports = function(config) {
       'bower_components/angular-base64/angular-base64.js',
       'bower_components/underscore/underscore.js',
       'bower_components/stringjs/dist/string.min.js',
+      'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

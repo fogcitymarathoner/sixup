@@ -17,13 +17,12 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
 
-import views
+from sixup import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^applications/$', views.ApplicationList.as_view()),
     url(r'^college-update/(?P<pk>[0-9]+)/', views.ApplicationDetail.as_view()),
-    url(r'^colleges/$', views.ApplicationList.as_view()),
     url(r'^users/$', views.UserList.as_view()),
     url(r'^user/$', views.UserDetail.as_view()),
     url(r'^user-update/(?P<pk>[0-9]+)/$', views.UserUpdate.as_view()),

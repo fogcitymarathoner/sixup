@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-import models
+from applicant import models
 
 
 class ApplicationAdmin(admin.ModelAdmin):
